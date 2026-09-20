@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>货架调研 · 美国购物平台竞品</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="top">
+        <div class="brand">
+          <h1>货架调研</h1>
+          <p>美国 Amazon / eBay / Walmart 等平台的公开报价</p>
+        </div>
+        <p class="key-status" id="key-status">
+          {% if serpapi_configured %}
+          已接入搜索 · 相同词 24 小时内走缓存
+          {% else %}
+          未配置 Key，可先用演示词
+          {% endif %}
+        </p>
+      </header>
+
+      <form class="search" id="search-form">
+        <label class="sr-only" for="query">商品名称</label>
+        <div class="search__row">
+          <input
+            id="query"
+            name="query"
+            type="text"
+            autocomplete="off"
+            placeholder="输入商品名称，例如 wireless earbuds"
+            required
+          />
+          <button type="submit" id="search-btn">搜索</button>
+        </div>
+        <div class="examples" aria-label="示例查询">
+          <button type="button" class="chip" data-query="wireless earbuds">wireless earbuds</button>
+          <button type="button" class="chip" data-query="yoga mat">yoga mat</button>
+          <button type="button" class="chip" data-query="portable blender">portable blender</button>
+        </div>
+      </form>
+
+      <p class="status" id="status" hidden></p>
+
+      <section class="result" id="result" hidden>
+        <article class="summary">
+          <div class="summary__head">
+            <h2>价格带</h2>
+            <p id="summary-meta"></p>
+          </div>
+          <div class="rail" id="price-rail" aria-label="价格带"></div>
+          <p class="conclusion" id="conclusion"></p>
+          <ul class="platforms" id="platforms"></ul>
+        </article>
+        <div class="filters" id="filters"></div>
+        <div class="grid" id="shelf"></div>
+      </section>
+
+      <section class="empty" id="empty">
+        <h2>先搜一个品名</h2>
+        <p>会列出图片、价格和购买链接，并给出一条竞争度判断。</p>
+      </section>
+    </div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

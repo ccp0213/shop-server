@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: shelf-research
+    runtime: python
+    plan: free
+    pythonVersion: "3.12.4"
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SERPAPI_API_KEY
+        sync: false
+      - key: CACHE_TTL_SECONDS
+        value: "86400"
+      - key: CACHE_DB_PATH
+        value: data/cache.db
